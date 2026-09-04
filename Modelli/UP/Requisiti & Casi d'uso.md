@@ -59,3 +59,10 @@ Uno **Scenario** è una sequenza di azioni ed interazioni tra attori
 	 - gestione: come gestirla
 
 #### Verifica casi d'uso
+- ###### Il test del capo:
+	 *"cosa avete fatto tutto il giorno?"* se il capo è felice, allora va bene
+- ###### Il test EBP:
+	 un processo di business elementare è un attività che *aggiunge un valore*
+- ###### Il test della dimensione:
+	 il formato dettagliato richede 3-10 pagine
+

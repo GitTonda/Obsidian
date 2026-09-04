@@ -10,7 +10,7 @@
 - [[Ideazione]] (inception):
      prima visione, studio economico, stime dei tempi
      Milestone: Obbiettivi
-- Elaborazione (elaboration):
+- [[Elaborazione]] (elaboration):
      visione più raffinata, impl. iterativa, risoluzione maggiori rischi
      Milestone: Architetturale
 - Costruzione (construction):
