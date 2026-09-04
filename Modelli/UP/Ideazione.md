@@ -1,5 +1,5 @@
 Stabilire una visione comune e la portata del progetto
-- 10% dei [[Casi d'uso]]
+- 10% dei [[Requisiti & Casi d'uso]]
 - requisiti non funzionali critici
 - studio economico
 - preparazione ambiente di sviluppo
@@ -9,7 +9,7 @@ L'obbiettivo NON è di definire tutti i requisiti, bensì si decide se il proget
 
 #### Elaborati:
 - Visione e Studio economico
-- Modello dei [[Casi d'uso]]
+- Modello dei [[Requisiti & Casi d'uso]]
 - Specifiche supplementari
 - Glossario
 - Lista dei Rischi e di Gestione dei Rischi

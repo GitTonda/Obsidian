@@ -20,13 +20,13 @@
      beta test
      Milestone: Rilascio
 
-![[Pasted image 20260902131547.png]]
+![[UP stages.png]]
 
 #### Discipline:
 insieme di attività e dei relativi elaborati. presenti in ogni iterazione.
 
 - Modellazione del business
-- Requisiti
+- [[Requisiti & Casi d'uso]]
 - Progettazione
 - Implementazione
 - Test
@@ -34,14 +34,6 @@ insieme di attività e dei relativi elaborati. presenti in ogni iterazione.
 - Gestione delle configurazioni e del cambiamento
 - Gestione progetto
 - Infrastruttura
-
-#### Requisiti:
-è una capacità o condizione a cui il sistema deve essere conforme
-
-Derivano da richieste degli utenti.
-2 Tipi:
-- Funzionali: comportamentali che definiscono il funzionamento del sistema (feature)
-- Non funzionali: proprietà del sistema nel complesso (sicurezza, ottimizzazione, ...)
 
 Modello FURPS+:
 - F - Funzionale
