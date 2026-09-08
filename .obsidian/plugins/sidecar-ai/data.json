@@ -1,0 +1,164 @@
+{
+  "activeProvider": "antigravity",
+  "providers": {
+    "antigravity": {
+      "id": "antigravity",
+      "name": "Google Antigravity",
+      "cliCommand": "agy",
+      "useWsl": false,
+      "extraCliFlags": "",
+      "selectedModel": "gemini-3.8-flash",
+      "modelEfforts": {
+        "gemini-3.8-flash": "High",
+        "gemini-3.7-flash": "Medium",
+        "gemini-3.6-flash": "Medium",
+        "gemini-3.1-pro": "Low",
+        "gpt-oss-120b": "Medium"
+      },
+      "cachedModels": [
+        {
+          "id": "gemini-3.8-flash",
+          "label": "Gemini 3.8 Flash",
+          "efforts": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "defaultEffort": "Medium",
+          "effortModelMap": {
+            "low": "gemini-3.8-flash-low",
+            "medium": "gemini-3.8-flash-medium",
+            "high": "gemini-3.8-flash-high"
+          }
+        },
+        {
+          "id": "gemini-3.7-flash",
+          "label": "Gemini 3.7 Flash",
+          "efforts": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "defaultEffort": "Medium",
+          "effortModelMap": {
+            "low": "gemini-3.7-flash-low",
+            "medium": "gemini-3.7-flash-medium",
+            "high": "gemini-3.7-flash-high"
+          }
+        },
+        {
+          "id": "gemini-3.6-flash",
+          "label": "Gemini 3.6 Flash",
+          "efforts": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "defaultEffort": "Medium",
+          "effortModelMap": {
+            "low": "gemini-3.6-flash-low",
+            "medium": "gemini-3.6-flash-medium",
+            "high": "gemini-3.6-flash-high"
+          }
+        },
+        {
+          "id": "gemini-3.1-pro",
+          "label": "Gemini 3.1 Pro",
+          "efforts": [
+            "Low",
+            "High"
+          ],
+          "defaultEffort": "Low",
+          "effortModelMap": {
+            "low": "gemini-3.1-pro-low",
+            "high": "gemini-3.1-pro-high"
+          }
+        },
+        {
+          "id": "claude-sonnet-4-6",
+          "label": "Claude Sonnet 4.6 (Thinking)",
+          "efforts": [],
+          "effortModelMap": {}
+        },
+        {
+          "id": "claude-opus-4-6-thinking",
+          "label": "Claude Opus 4.6 (Thinking)",
+          "efforts": [],
+          "effortModelMap": {}
+        },
+        {
+          "id": "gpt-oss-120b",
+          "label": "GPT-OSS 120B",
+          "efforts": [
+            "Medium"
+          ],
+          "defaultEffort": "Medium",
+          "effortModelMap": {
+            "medium": "gpt-oss-120b-medium"
+          }
+        }
+      ],
+      "defaultMode": "",
+      "conversationId": null
+    },
+    "copilot": {
+      "id": "copilot",
+      "name": "GitHub Copilot",
+      "cliCommand": "copilot",
+      "useWsl": false,
+      "extraCliFlags": "",
+      "selectedModel": "",
+      "modelEfforts": {},
+      "cachedModels": [],
+      "defaultMode": "",
+      "conversationId": null
+    },
+    "pi": {
+      "id": "pi",
+      "name": "Pi Coding Agent",
+      "cliCommand": "pi",
+      "useWsl": false,
+      "extraCliFlags": "",
+      "selectedModel": "github-copilot/claude-sonnet-4.5",
+      "modelEfforts": {
+        "github-copilot/claude-sonnet-4.5": "High"
+      },
+      "cachedModels": [
+        {
+          "id": "github-copilot/claude-sonnet-4.5",
+          "label": "Claude Sonnet 4.5 (GitHub Copilot)",
+          "efforts": [
+            "Off",
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "defaultEffort": "High"
+        },
+        {
+          "id": "github-copilot/claude-haiku-4.5",
+          "label": "Claude Haiku 4.5 (GitHub Copilot)",
+          "efforts": [
+            "Off",
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "defaultEffort": "High"
+        },
+        {
+          "id": "github-copilot/gpt-4o",
+          "label": "GPT-4o (GitHub Copilot)",
+          "efforts": []
+        }
+      ],
+      "defaultMode": "",
+      "conversationId": null
+    }
+  },
+  "autoAttachActiveNote": true,
+  "autoIncludeSelection": true,
+  "autoScrollChat": true,
+  "showStatusBarItem": true,
+  "hasAcceptedProcessExecutionDisclaimer": true
+}
