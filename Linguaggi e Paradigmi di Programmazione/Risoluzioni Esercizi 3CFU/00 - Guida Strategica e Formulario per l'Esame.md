@@ -8,14 +8,14 @@
 
 ## 🗺️ Mappa dei 6 Schemi dell'Esame
 
-| Archetipo | Argomento | File PDF | Tipo di domanda d'esame |
-|---|---|---|---|
-| **1** | **Ordini & Monoidi Categoriali** | Parte 1 | Dimostrare che un pre-ordine/poset/monoide è categoria, scrivere diagrammi commutativi. |
-| **2** | **Costruzioni Universali** | Parte 1 | Terminale, Prodotto, Coprodotto, unicità a meno di iso, determinare se una tupla è prodotto/coprodotto. |
-| **3** | **Funtori & Leggi dei Funtori** | Parte 2 | Definire `fmap`, dimostrare legge identità e composizione, diagrammi in $\mathbf{Set}$. |
-| **4** | **Funtori Applicativi** | Parte 3 | Motivazione d'uso, definire `pure` e `(<*>)`, dimostrare la legge di composizione applicativa. |
-| **5** | **Trasformazioni Naturali** | Parte 4 | Definizione, verificare il quadrato di naturalità $\eta_B \circ F(f) = G(f) \circ \eta_A$. |
-| **6** | **Monadi & State/Reader** | Parte 4 | Definire `(>>=)`, dimostrare associatività del bind, spiegazione di `State` e `Reader`. |
+| Archetipo | Argomento                        | File PDF | Tipo di domanda d'esame                                                                                 |
+| --------- | -------------------------------- | -------- | ------------------------------------------------------------------------------------------------------- |
+| **1**     | **Ordini & Monoidi Categoriali** | Parte 1  | Dimostrare che un pre-ordine/poset/monoide è categoria, scrivere diagrammi commutativi.                 |
+| **2**     | **Costruzioni Universali**       | Parte 1  | Terminale, Prodotto, Coprodotto, unicità a meno di iso, determinare se una tupla è prodotto/coprodotto. |
+| **3**     | **Funtori & Leggi dei Funtori**  | Parte 2  | Definire `fmap`, dimostrare legge identità e composizione, diagrammi in $\mathbf{Set}$.                 |
+| **4**     | **Funtori Applicativi**          | Parte 3  | Motivazione d'uso, definire `pure` e `(<*>)`, dimostrare la legge di composizione applicativa.          |
+| **5**     | **Trasformazioni Naturali**      | Parte 4  | Definizione, verificare il quadrato di naturalità $\eta_B \circ F(f) = G(f) \circ \eta_A$.              |
+| **6**     | **Monadi & State/Reader**        | Parte 4  | Definire `(>>=)`, dimostrare associatività del bind, spiegazione di `State` e `Reader`.                 |
 
 ---
 
