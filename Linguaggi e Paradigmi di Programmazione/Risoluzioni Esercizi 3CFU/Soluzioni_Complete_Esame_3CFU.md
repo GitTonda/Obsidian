@@ -85,14 +85,14 @@ $$\le \;=\; \{(a, a), (b, b), (c, c), (a, b), (b, c), (a, c), (b, a)\}$$
 
 **Diagramma commutativo:**
 ```mermaid
-graph LR
-    a((a)) -->|id_a| a
-    b((b)) -->|id_b| b
-    c((c)) -->|id_c| c
-    a -->|(a,b)| b
-    b -->|(b,a)| a
-    b -->|(b,c)| c
-    a -->|(a,c)| c
+flowchart LR
+    a((a)) -->|"id_a"| a
+    b((b)) -->|"id_b"| b
+    c((c)) -->|"id_c"| c
+    a -->|"(a,b)"| b
+    b -->|"(b,a)"| a
+    b -->|"(b,c)"| c
+    a -->|"(a,c)"| c
 ```
 - La composizione $(b, c) \circ (a, b) = (a, c)$ commuta.
 - La composizione $(b, a) \circ (a, b) = (a, a) = \mathrm{id}_a$ commuta.
@@ -127,20 +127,23 @@ Dunque ogni ordine parziale è una categoria. (L'antisimmetria aggiunge l'ulteri
 1. **Esempio:** Sia $X = \{a, b, c\}$ con la relazione:
    $$\le \;=\; \{(a, a), (b, b), (c, c), (a, b), (b, c), (a, c)\}$$
 2. **Diagramma commutativo:**
-   ```mermaid
-   graph LR
-       a((a)) -->|(a,b)| b((b))
-       b -->|(b,c)| c((c))
-       a -->|(a,c)| c
-   ```
-   *(I cappi di identità su ciascun nodo sono impliciti).*
+
+```mermaid
+flowchart LR
+    a((a)) -->|"(a,b)"| b((b))
+    b -->|"(b,c)"| c((c))
+    a -->|"(a,c)"| c
+```
+*(I cappi di identità su ciascun nodo sono impliciti).*
+
 3. **Grafo che NON può essere un sottografo:**
    Un grafo contenente un ciclo tra nodi distinti, ad esempio:
-   ```mermaid
-   graph LR
-       a((a)) --> b((b))
-       b --> a
-   ```
+
+```mermaid
+flowchart LR
+    a((a)) --> b((b))
+    b --> a
+```
    **Motivazione:** In un ordine parziale vale l'antisimmetria ($a \le b \land b \le a \implies a = b$). La presenza contemporanea di una freccia $a \to b$ e di una freccia $b \to a$ con $a \ne b$ violerebbe l'antisimmetria. Inoltre, non possono esistere due frecce parallele distinte tra gli stessi due nodi ($|\mathbf{C}(x, y)| \le 1$).
 
 ---
@@ -167,19 +170,22 @@ Poiché un ordine totale è a tutti gli effetti un ordine parziale (e quindi un 
 1. **Esempio:** L'insieme $X = \{1, 2, 3\}$ con il consueto ordine $\le$:
    $$\le \;=\; \{(1,1), (2,2), (3,3), (1,2), (2,3), (1,3)\}$$
 2. **Diagramma commutativo:**
-   ```mermaid
-   graph LR
-       1((1)) --> 2((2))
-       2 --> 3((3))
-       1 --> 3
-   ```
+
+```mermaid
+flowchart LR
+    n1((1)) --> n2((2))
+    n2 --> n3((3))
+    n1 --> n3
+```
+
 3. **Grafo che NON può essere un sottografo:**
    Un grafo in cui due nodi non sono confrontabili in alcuna direzione, ad esempio:
-   ```mermaid
-   graph LR
-       1((1)) --> 2((2))
-       1 --> 3((3))
-   ```
+
+```mermaid
+flowchart LR
+    n1((1)) --> n2((2))
+    n1 --> n3((3))
+```
    *(senza alcuna freccia tra 2 e 3).*  
    **Motivazione:** In un ordine totale ogni coppia di elementi deve essere confrontabile ($\forall x, y.\; x \le y \lor y \le x$). L'assenza di frecce tra $2$ e $3$ (in entrambe le direzioni) violerebbe l'assioma di totalità (come mostrato nei lucidi Roversi, slide 14 di `CT0050`).
 
@@ -306,6 +312,14 @@ Un grafo orientato $G = (V, E)$ consiste unicamente di un insieme di vertici $V$
 **Soluzione:**
 1. **Definizione di Monomorfismo:** In una categoria $\mathbf{C}$, un morfismo $f: X \to Y$ è detto **monomorfismo** (o freccia mono, o semplificabile a sinistra) se per ogni coppia di morfismi paralleli $g, h: Z \to X$:
    $$f \circ g = f \circ h \implies g = h$$
+
+```mermaid
+flowchart LR
+    Z((Z)) -->|"g"| X((X))
+    Z -->|"h"| X
+    X -->|"f (mono)"| Y((Y))
+```
+
 2. **Generalizzazione da funzione iniettiva:**
    In $\mathbf{Set}$, una funzione $f: X \to Y$ è iniettiva se $\forall x, x' \in X,\; f(x) = f(x') \implies x = x'$.
    Se consideriamo $Z = \{\bullet\}$ (un singoletto), due funzioni $g, h: \{\bullet\} \to X$ corrispondono alla scelta di due elementi $g(\bullet) = x$ e $h(\bullet) = x'$ in $X$.
@@ -321,6 +335,14 @@ Un grafo orientato $G = (V, E)$ consiste unicamente di un insieme di vertici $V$
 **Soluzione:**
 1. **Definizione di Epimorfismo:** In una categoria $\mathbf{C}$, un morfismo $f: X \to Y$ è detto **epimorfismo** (o freccia epi, o semplificabile a destra) se per ogni coppia di morfismi paralleli $g, h: Y \to Z$:
    $$g \circ f = h \circ f \implies g = h$$
+
+```mermaid
+flowchart LR
+    X((X)) -->|"f (epi)"| Y((Y))
+    Y -->|"g"| Z((Z))
+    Y -->|"h"| Z
+```
+
 2. **Generalizzazione da funzione suriettiva:**
    In $\mathbf{Set}$, $f: X \to Y$ è suriettiva se l'immagine di $f$ copre tutto il codominio: $\mathrm{Im}(f) = Y$.
    Se $f$ non fosse suriettiva, esisterebbe almeno un elemento $y_0 \in Y \setminus \mathrm{Im}(f)$. Potremmo allora costruire due funzioni $g, h: Y \to \{0, 1\}$ che concordano su tutti gli elementi di $\mathrm{Im}(f)$ ma differiscono su $y_0$ (es. $g(y_0) = 0$ e $h(y_0) = 1$). In tal caso avremmo $g \circ f = h \circ f$ ma $g \ne h$.
@@ -333,6 +355,13 @@ Un grafo orientato $G = (V, E)$ consiste unicamente di un insieme di vertici $V$
 
 **Soluzione:**
 1. **Definizione:** In una categoria $\mathbf{C}$, un oggetto $T \in \mathrm{obj}(\mathbf{C})$ è detto **terminale** se per ogni oggetto $X \in \mathrm{obj}(\mathbf{C})$ esiste **uno e un solo** morfismo $!_X: X \to T$.
+
+```mermaid
+flowchart LR
+    X((X)) -->|"!_X (unico)"| T((T))
+    Y((Y)) -->|"!_Y (unico)"| T
+```
+
 2. **Generalizzazione dal singoletto:**
    Nella categoria $\mathbf{Set}$, consideriamo un insieme singoletto $\{\star\}$. Per qualsiasi insieme $X$, quante funzioni esistono da $X$ a $\{\star\}$?
    Esiste una sola funzione: quella costante che mappa ogni elemento $x \in X$ nell'unico elemento $\star$: $f(x) = \star$.
@@ -386,6 +415,16 @@ Poiché esistono 3 funzioni distinte da $\{1\}$ a $\{a, b, c\}$, la freccia non 
 **Soluzione:**
 1. **Definizione di Prodotto:** In una categoria $\mathbf{C}$, il prodotto di due oggetti $A$ e $B$ è una tripla $(P, \pi_1, \pi_2)$ con $\pi_1: P \to A$ e $\pi_2: P \to B$, tale che per ogni altro oggetto $C$ dotato di due frecce $f: C \to A$ e $g: C \to B$, esiste un'**unica freccia mediatrice** $m: C \to P$ tale che:
    $$\pi_1 \circ m = f \quad \text{e} \quad \pi_2 \circ m = g$$
+
+```mermaid
+flowchart TD
+    C((C)) -->|"f"| A((A))
+    C -->|"g"| B((B))
+    C -->|"m (unica)"| P((P = A × B))
+    P -->|"π1"| A
+    P -->|"π2"| B
+```
+
 2. **Perché $(a, \backslash x \to x, \backslash x \to y::b)$ NON è un prodotto:**
    Qui il candidato è $P = a$, con proiezioni $p_1 = \lambda x \to x$ e $p_2 = \lambda x \to y$ (funzione costante che restituisce un elemento prefissato $y \in b$).
    Prendiamo come candidato test la vera coppia $C = (a, b)$ con le proiezioni standard $f = \mathrm{fst}$ e $g = \mathrm{snd}$.
@@ -489,6 +528,15 @@ Siano $(P, \pi_1^P, \pi_2^P)$ e $(Q, \pi_1^Q, \pi_2^Q)$ due prodotti per gli ogg
 > Per ogni candidato $(C, q_1, q_2)$ con $q_1: A \to C$ e $q_2: B \to C$, deve esistere un'**unica freccia mediatrice** $s: A + B \to C$ tale che:
 > $$s \circ \iota_1 = q_1 \quad \text{e} \quad s \circ \iota_2 = q_2$$
 > In Haskell il coprodotto è `Either a b` con $\iota_1 = \mathrm{Left}$ e $\iota_2 = \mathrm{Right}$.
+
+```mermaid
+flowchart TD
+    A((A)) -->|"q1"| C((C))
+    B((B)) -->|"q2"| C
+    A -->|"ι1"| S((A + B))
+    B -->|"ι2"| S
+    S -->|"s (unica)"| C
+```
 
 ### Esercizio 28
 > **Testo:** Is the following triple:
@@ -656,14 +704,22 @@ Dunque `Either a a` $\cong$ `(Either () (), a)`. $\blacksquare$
    - $\mathcal{P}f(\{x\}) = \{f(x)\} = \{p\} \in \mathcal{P}(B)$
    - $\mathcal{P}f(\{x, y\}) = \{f(x), f(y)\} = \{p, q\} \in \mathcal{P}(B)$
 4. **Diagramma commutativo:**
-   ```mermaid
-   graph TD
-       A["A = {x, y}"] -->|"f = {(x,p), (y,q)}"| B["B = {p, q}"]
-       PA["P(A) = {∅, {x}, {y}, {x,y}}"] -->|"P(f)"| PB["P(B) = {∅, {p}, {q}, {p,q}}"]
-   ```
-   *Decorazione degli elementi:*
-   $$\{x\} \in \mathcal{P}(A) \xrightarrow{\mathcal{P}f} \{p\} \in \mathcal{P}(B)$$
-   $$\{x, y\} \in \mathcal{P}(A) \xrightarrow{\mathcal{P}f} \{p, q\} \in \mathcal{P}(B)$$
+
+```mermaid
+flowchart TD
+    subgraph Insiemi["Insiemi Base in Set"]
+        A["A = {x, y}"] -->|"f = {(x,p), (y,q)}"| B["B = {p, q}"]
+    end
+    subgraph Powerset["Funtore Powerset 𝒫"]
+        PA["𝒫(A) = {∅, {x}, {y}, {x,y}}"] -->|"𝒫(f)"| PB["𝒫(B) = {∅, {p}, {q}, {p,q}}"]
+    end
+    A -.->|"𝒫"| PA
+    B -.->|"𝒫"| PB
+```
+
+*Decorazione degli elementi:*
+- $\{x\} \in \mathcal{P}(A) \xrightarrow{\mathcal{P}f} \{p\} \in \mathcal{P}(B)$
+- $\{x, y\} \in \mathcal{P}(A) \xrightarrow{\mathcal{P}f} \{p, q\} \in \mathcal{P}(B)$
 
 ---
 
@@ -681,11 +737,19 @@ Dunque `Either a a` $\cong$ `(Either () (), a)`. $\blacksquare$
 
 **Soluzione:**
 1. **Diagramma:**
-   ```mermaid
-   graph TD
-       Sigma["Σ = {0, 1}"] -->|"f"| Gamma["Γ = {aa, b}"]
-       SigmaStar["Σ*"] -->|"f*"| GammaStar["Γ*"]
-   ```
+
+```mermaid
+flowchart TD
+    subgraph Alfabeti["Alfabeti"]
+        Sigma["Σ = {0, 1}"] -->|"f: 0 ↦ aa, 1 ↦ b"| Gamma["Γ = {aa, b}"]
+    end
+    subgraph Monoidi["Monoidi Liberi"]
+        SigmaStar["Σ* = {0, 1}*"] -->|"f*"| GammaStar["Γ* = {aa, b}*"]
+    end
+    Sigma -.->|"(-)*"| SigmaStar
+    Gamma -.->|"(-)*"| GammaStar
+```
+
 2. **Analisi della stringa $aabaa$:**
    Scomponiamo la stringa $aabaa$ rispetto ai simboli generabili tramite $f$:
    $$aabaa = (aa) \cdot (b) \cdot (aa) = f(0) \cdot f(1) \cdot f(0) = f^*(0 \cdot 1 \cdot 0) = f^*(010)$$
@@ -699,7 +763,20 @@ Dunque `Either a a` $\cong$ `(Either () (), a)`. $\blacksquare$
 > • Is $pqqrqqp$ an element of $\Gamma^*$ obtained via the Kleene Star construction? Explain your reasoning.
 
 **Soluzione:**
-1. **Diagramma:** analogo, con $\Sigma \xrightarrow{f} \Gamma$ e $\Sigma^* \xrightarrow{f^*} \Gamma^*$.
+1. **Diagramma:**
+
+```mermaid
+flowchart TD
+    subgraph Alfabeti["Alfabeti"]
+        Sigma["Σ = {x, y, z}"] -->|"f: x ↦ p, y ↦ qq, z ↦ r"| Gamma["Γ = {p, qq, r}"]
+    end
+    subgraph Monoidi["Monoidi Liberi"]
+        SigmaStar["Σ* = {x, y, z}*"] -->|"f*"| GammaStar["Γ* = {p, qq, r}*"]
+    end
+    Sigma -.->|"(-)*"| SigmaStar
+    Gamma -.->|"(-)*"| GammaStar
+```
+
 2. **Analisi della stringa $pqqrqqp$:**
    Scomponiamo:
    $$pqqrqqp = (p) \cdot (qq) \cdot (r) \cdot (qq) \cdot (p) = f(x) \cdot f(y) \cdot f(z) \cdot f(y) \cdot f(x) = f^*(xyzyx)$$
@@ -714,10 +791,25 @@ Dunque `Either a a` $\cong$ `(Either () (), a)`. $\blacksquare$
 > • Determine whether $mmnmmn$ belongs to $\Gamma^*$ under the Kleene Star functor $(-)^*$. Provide justification.
 
 **Soluzione:**
-Scomponiamo $mmnmmn$:
-$$mmnmmn = (mm) \cdot (n) \cdot (mm) \cdot (n) = f(u) \cdot f(v) \cdot f(u) \cdot f(v) = f^*(uvuv)$$
-Poiché la stringa sorgente $uvuv \in \Sigma^*$, $f^*(uvuv) = mmnmmn \in \Gamma^*$.
-**Risposta:** **SÌ.**
+1. **Diagramma:**
+
+```mermaid
+flowchart TD
+    subgraph Alfabeti["Alfabeti"]
+        Sigma["Σ = {u, v}"] -->|"f: u ↦ mm, v ↦ n"| Gamma["Γ = {mm, n}"]
+    end
+    subgraph Monoidi["Monoidi Liberi"]
+        SigmaStar["Σ* = {u, v}*"] -->|"f*"| GammaStar["Γ* = {mm, n}*"]
+    end
+    Sigma -.->|"(-)*"| SigmaStar
+    Gamma -.->|"(-)*"| GammaStar
+```
+
+2. **Analisi della stringa $mmnmmn$:**
+   Scomponiamo $mmnmmn$:
+   $$mmnmmn = (mm) \cdot (n) \cdot (mm) \cdot (n) = f(u) \cdot f(v) \cdot f(u) \cdot f(v) = f^*(uvuv)$$
+   Poiché la stringa sorgente $uvuv \in \Sigma^*$, $f^*(uvuv) = mmnmmn \in \Gamma^*$.
+   **Risposta:** **SÌ.**
 
 ---
 
@@ -958,34 +1050,260 @@ data U a b where
 
 ## CT0300: Diagrammi Categoriali in $\mathbf{Set}$ per Funtori (Esercizi 16 - 21)
 
-> **Struttura Standard della Risposta (Richiesta per tutti gli esercizi 16–21):**
-> 1. Richiamare la definizione del tipo di dato.
-> 2. Disegnare il diagramma commutativo generico generato dal funtore $F$:
->    ```
->        a  ---- f ---->  b
->        |                |
->        F                F
->        v                v
->       F a -- fmap f --> F b
->    ```
-> 3. Decorare gli oggetti con istanze concrete:
->    - Scegliere due insiemi finiti semplici: $a = \{1, 2\}$, $b = \{p, q\}$.
->    - Fissare una funzione $f$: $f(1) = p, f(2) = q$.
-> 4. Definire il grafo della funzione $f$:
->    $$\mathrm{graph}(f) = \{(1, p), (2, q)\}$$
-> 5. Descrivere a parole come opera `fmap f` senza darne la definizione formale di codice:
->    *"Prende una struttura contenente valori in $a$ e la trasforma preservando l'intera forma/scheletro strutturale (nodi, puntatori, rami), sostituendo ogni elemento interno $x \in a$ con il corrispondente valore $f(x) \in b$."*
+> **Contesto comune per gli Esercizi 16–21:**
+> Siamo nella categoria $\mathbf{Set}$. Consideriamo come insiemi base semplici:
+> $$a = \{1, 2\}, \quad b = \{p, q\}$$
+> e come funzione $f: a \to b$:
+> $$f(1) = p, \quad f(2) = q$$
+> Il suo **grafo** (inteso in teoria degli insiemi come sottoinsieme del prodotto cartesiano $a \times b$) è:
+> $$\mathrm{graph}(f) = \{(1, p), (2, q)\} \subseteq a \times b$$
 
-### Tabella riassuntiva per gli Esercizi 16–21:
+---
 
-| Es. | Tipo | Istanze concrete in $F a$ ($a=\{1, 2\}$) | Istanze trasformate in $F b$ tramite `fmap f` |
-|---|---|---|---|
-| **16** | `Maybe a` | `Nothing`, `Just 1` | `Nothing`, `Just p` |
-| **17** | `List a` | `Nil`, `Cons 1 (Cons 2 Nil)` | `Nil`, `Cons p (Cons q Nil)` |
-| **18** | `Either c a` | `Left c0`, `Right 1` | `Left c0`, `Right p` |
-| **19** | `T a` | `TL 1`, `TN [TL 1, TL 2]` | `TL p`, `TN [TL p, TL q]` |
-| **20** | `BTree n` (valori sui nodi) | `Node 1 Leaf Leaf` | `Node p Leaf Leaf` |
-| **21** | `BTree n l` (valori sulle foglie) | `Node (Leaf 1) (Leaf 2)` | `Node (Leaf p) (Leaf q)` |
+### Esercizio 16 (`Maybe a`)
+> **Testo:** Let us assume that we are in the category $\mathbf{Set}$.
+> 1. Recall the definition of `Maybe a`.
+> 2. Draw the corresponding diagram, starting from an arrow `f :: a -> b`.
+> 3. Decorate the diagram objects with simple instances.
+> 4. Define a simple graph for `f :: a -> b`.
+> 5. Describe how `fmap f` would work, without explicitly defining it.
+
+**Soluzione:**
+1. **Definizione di `Maybe a`:**
+   ```haskell
+   data Maybe a = Nothing | Just a
+   ```
+2. **Diagramma commutativo del funtore:**
+
+```mermaid
+flowchart TD
+    subgraph Oggetti_Base["Insiemi Base"]
+        A["a = {1, 2}"] -->|"f"| B["b = {p, q}"]
+    end
+    subgraph Oggetti_Funtoriali["Funtore Maybe"]
+        FA["Maybe a"] -->|"fmap f"| FB["Maybe b"]
+    end
+    A -.->|"Maybe"| FA
+    B -.->|"Maybe"| FB
+```
+
+3. **Decorazione del diagramma con istanze semplici:**
+   - Istanze in $a$: $1, 2 \in a$. Istanze in $b$: $p, q \in b$.
+   - Istanze in $\text{Maybe } a$: $\text{Nothing}, \text{Just } 1, \text{Just } 2$.
+   - Azione di $\text{fmap } f$:
+     - $\text{fmap } f \text{ Nothing} = \text{Nothing}$
+     - $\text{fmap } f (\text{Just } 1) = \text{Just } (f(1)) = \text{Just } p$
+     - $\text{fmap } f (\text{Just } 2) = \text{Just } (f(2)) = \text{Just } q$
+4. **Grafo semplice per $f: a \to b$:**
+   $$\mathrm{graph}(f) = \{(1, p), (2, q)\} \subset \{1, 2\} \times \{p, q\}$$
+   Rappresentato come grafo orientato: $1 \xrightarrow{f} p$ e $2 \xrightarrow{f} q$.
+5. **Descrizione del funzionamento di `fmap f`:**
+   `fmap f` esamina il valore opzionale incapsulato: se la struttura è vuota (`Nothing`), la lascia invariata restituendo `Nothing`; se contiene un elemento (`Just x`), preserva il costruttore `Just` applicando la funzione $f$ al valore interno, producendo `Just (f x)`.
+
+---
+
+### Esercizio 17 (`List a`)
+> **Testo:** Let us assume that we are in the category $\mathbf{Set}$.
+> 1. Define a data-type `List a` that recursively formalizes the corresponding concept.
+> 2. Draw the corresponding diagram, starting from an arrow `f :: a -> b`.
+> 3. Decorate the diagram objects with simple instances.
+> 4. Define a simple graph for `f :: a -> b`.
+> 5. Describe how `fmap f` would work, without explicitly defining it.
+
+**Soluzione:**
+1. **Definizione ricorsiva di `List a`:**
+   ```haskell
+   data List a = Nil | Cons a (List a)
+   ```
+2. **Diagramma commutativo del funtore:**
+
+```mermaid
+flowchart TD
+    subgraph Oggetti_Base["Insiemi Base"]
+        A["a = {1, 2}"] -->|"f"| B["b = {p, q}"]
+    end
+    subgraph Oggetti_Funtoriali["Funtore List"]
+        FA["List a"] -->|"fmap f"| FB["List b"]
+    end
+    A -.->|"List"| FA
+    B -.->|"List"| FB
+```
+
+3. **Decorazione del diagramma con istanze semplici:**
+   - Istanze in $\text{List } a$: $\text{Nil}$, $\text{Cons } 1 \text{ Nil}$, $\text{Cons } 1 (\text{Cons } 2 \text{ Nil})$.
+   - Azione di $\text{fmap } f$:
+     - $\text{Nil} \mapsto \text{Nil}$
+     - $\text{Cons } 1 \text{ Nil} \mapsto \text{Cons } p \text{ Nil}$
+     - $\text{Cons } 1 (\text{Cons } 2 \text{ Nil}) \mapsto \text{Cons } p (\text{Cons } q \text{ Nil})$
+4. **Grafo semplice per $f: a \to b$:**
+   $$\mathrm{graph}(f) = \{(1, p), (2, q)\}$$
+5. **Descrizione del funzionamento di `fmap f`:**
+   `fmap f` scorre ricorsivamente la lista mantenendo invariata la lunghezza, l'ordine sequenziale e i collegamenti tra i nodi (`Cons` e terminatore `Nil`), sostituendo ciascun elemento $x$ memorizzato in testa con $f(x)$.
+
+---
+
+### Esercizio 18 (`Either a b`)
+> **Testo:** Let us assume that we are in the category $\mathbf{Set}$.
+> 1. Recall the definition of `Either a b`.
+> 2. Draw the corresponding diagram, starting from an arrow `f :: a -> b`.
+> 3. Decorate the diagram objects with simple instances.
+> 4. Define a simple graph for `f :: a -> b`.
+> 5. Describe how `fmap f` would work, without explicitly defining it.
+
+**Soluzione:**
+1. **Definizione di `Either a b`:**
+   ```haskell
+   data Either a b = Left a | Right b
+   ```
+   *(Nota: per essere un funtore di kind `* -> *`, il funtore è parzialmente applicato al primo tipo: `Either c`, mappando il secondo parametro: $f: a \to b \implies \text{Either } c\; a \to \text{Either } c\; b$. Sia $c = \{c_0\}$).*
+2. **Diagramma commutativo del funtore:**
+
+```mermaid
+flowchart TD
+    subgraph Oggetti_Base["Insiemi Base"]
+        A["a = {1, 2}"] -->|"f"| B["b = {p, q}"]
+    end
+    subgraph Oggetti_Funtoriali["Funtore Either c"]
+        FA["Either c a"] -->|"fmap f"| FB["Either c b"]
+    end
+    A -.->|"Either c"| FA
+    B -.->|"Either c"| FB
+```
+
+3. **Decorazione del diagramma con istanze semplici:**
+   - Istanze in $\text{Either } c\; a$: $\text{Left } c_0$, $\text{Right } 1$, $\text{Right } 2$.
+   - Azione di $\text{fmap } f$:
+     - $\text{Left } c_0 \mapsto \text{Left } c_0$
+     - $\text{Right } 1 \mapsto \text{Right } (f(1)) = \text{Right } p$
+     - $\text{Right } 2 \mapsto \text{Right } (f(2)) = \text{Right } q$
+4. **Grafo semplice per $f: a \to b$:**
+   $$\mathrm{graph}(f) = \{(1, p), (2, q)\}$$
+5. **Descrizione del funzionamento di `fmap f`:**
+   Se il valore è incapsulato dal costruttore sinistro (`Left x`), `fmap f` lo ignora e lo propaga identico; se il valore è incapsulato nel costruttore destro (`Right x`), preserva il costruttore `Right` applicando la funzione $f$ al valore $x$, restituendo `Right (f x)`.
+
+---
+
+### Esercizio 19 (`T a`)
+> **Testo:** Consider the following Haskell data-type:
+> ```haskell
+> data T a where
+>   TL :: a -> T a
+>   TN :: [T a] -> T a
+> ```
+> 1. Draw the corresponding diagram, starting from an arrow `f :: a -> b`.
+> 2. Decorate the diagram objects with simple instances.
+> 3. Define a simple graph for `f :: a -> b`.
+> 4. Describe how `fmap f` would work, without explicitly defining it.
+
+**Soluzione:**
+1. **Diagramma commutativo del funtore:**
+
+```mermaid
+flowchart TD
+    subgraph Oggetti_Base["Insiemi Base"]
+        A["a = {1, 2}"] -->|"f"| B["b = {p, q}"]
+    end
+    subgraph Oggetti_Funtoriali["Funtore T"]
+        FA["T a"] -->|"fmap f"| FB["T b"]
+    end
+    A -.->|"T"| FA
+    B -.->|"T"| FB
+```
+
+2. **Decorazione del diagramma con istanze semplici:**
+   - Istanze foglia in $T\, a$: $\text{TL } 1, \text{TL } 2$.
+   - Istanza albero ramificato in $T\, a$: $\text{TN } [\text{TL } 1, \text{TL } 2]$.
+   - Azione di $\text{fmap } f$:
+     - $\text{TL } 1 \mapsto \text{TL } p$
+     - $\text{TL } 2 \mapsto \text{TL } q$
+     - $\text{TN } [\text{TL } 1, \text{TL } 2] \mapsto \text{TN } [\text{TL } p, \text{TL } q]$
+3. **Grafo semplice per $f: a \to b$:**
+   $$\mathrm{graph}(f) = \{(1, p), (2, q)\}$$
+4. **Descrizione del funzionamento di `fmap f`:**
+   `fmap f` attraversa ricorsivamente la struttura dell'albero: per le foglie (`TL x`), trasforma il valore interno applicando $f(x)$; per i nodi interni (`TN ts`), mantiene inalterata la struttura della lista di sottoalberi e applica ricorsivamente `fmap f` a ciascun sottoalbero della lista.
+
+---
+
+### Esercizio 20 (`BTree n`, valori sui nodi)
+> **Testo:** Consider the following Haskell data-type:
+> ```haskell
+> data BTree n where
+>   Leaf :: BTree n
+>   Node :: n -> BTree n -> BTree n -> BTree n
+> ```
+> 1. Draw the corresponding diagram, starting from an arrow `f :: a -> b`.
+> 2. Decorate the diagram objects with simple instances.
+> 3. Define a simple graph for `f :: a -> b`.
+> 4. Describe how `fmap f` would work, without explicitly defining it.
+
+**Soluzione:**
+1. **Diagramma commutativo del funtore:**
+
+```mermaid
+flowchart TD
+    subgraph Oggetti_Base["Insiemi Base"]
+        A["a = {1, 2}"] -->|"f"| B["b = {p, q}"]
+    end
+    subgraph Oggetti_Funtoriali["Funtore BTree"]
+        FA["BTree a"] -->|"fmap f"| FB["BTree b"]
+    end
+    A -.->|"BTree"| FA
+    B -.->|"BTree"| FB
+```
+
+2. **Decorazione del diagramma con istanze semplici:**
+   - Istanza vuota: $\text{Leaf} \in \text{BTree } a$.
+   - Istanza con nodi: $\text{Node } 1 \text{ Leaf Leaf} \in \text{BTree } a$, e $\text{Node } 1 (\text{Node } 2 \text{ Leaf Leaf}) \text{ Leaf} \in \text{BTree } a$.
+   - Azione di $\text{fmap } f$:
+     - $\text{Leaf} \mapsto \text{Leaf}$
+     - $\text{Node } 1 \text{ Leaf Leaf} \mapsto \text{Node } p \text{ Leaf Leaf}$
+     - $\text{Node } 1 (\text{Node } 2 \text{ Leaf Leaf}) \text{ Leaf} \mapsto \text{Node } p (\text{Node } q \text{ Leaf Leaf}) \text{ Leaf}$
+3. **Grafo semplice per $f: a \to b$:**
+   $$\mathrm{graph}(f) = \{(1, p), (2, q)\}$$
+4. **Descrizione del funzionamento di `fmap f`:**
+   `fmap f` visita l'albero binario: le foglie vuote `Leaf` rimangono invariate; su ogni nodo `Node x left right`, sostituisce il valore memorizzato $x$ con $f(x)$ e richiama ricorsivamente `fmap f` sul sottoalbero sinistro e sul sottoalbero destro, preservando esattamente la topologia dell'albero.
+
+---
+
+### Esercizio 21 (`BTree n l`, valori sulle foglie)
+> **Testo:** Consider the following Haskell data-type:
+> ```haskell
+> data BTree n l where
+>   Leaf :: l -> BTree n l
+>   Node :: BTree n l -> BTree n l -> BTree n l
+> ```
+> *(Funtore rispetto al tipo delle foglie $l$: $\text{BTree } n$).*
+> 1. Draw the corresponding diagram, starting from an arrow `f :: a -> b`.
+> 2. Decorate the diagram objects with simple instances.
+> 3. Define a simple graph for `f :: a -> b`.
+> 4. Describe how `fmap f` would work, without explicitly defining it.
+
+**Soluzione:**
+1. **Diagramma commutativo del funtore:**
+
+```mermaid
+flowchart TD
+    subgraph Oggetti_Base["Insiemi Base"]
+        A["a = {1, 2}"] -->|"f"| B["b = {p, q}"]
+    end
+    subgraph Oggetti_Funtoriali["Funtore BTree n"]
+        FA["BTree n a"] -->|"fmap f"| FB["BTree n b"]
+    end
+    A -.->|"BTree n"| FA
+    B -.->|"BTree n"| FB
+```
+
+2. **Decorazione del diagramma con istanze semplici:**
+   - Istanze foglia in $\text{BTree } n\; a$: $\text{Leaf } 1, \text{Leaf } 2$.
+   - Istanza albero in $\text{BTree } n\; a$: $\text{Node } (\text{Leaf } 1) (\text{Leaf } 2)$.
+   - Azione di $\text{fmap } f$:
+     - $\text{Leaf } 1 \mapsto \text{Leaf } p$
+     - $\text{Leaf } 2 \mapsto \text{Leaf } q$
+     - $\text{Node } (\text{Leaf } 1) (\text{Leaf } 2) \mapsto \text{Node } (\text{Leaf } p) (\text{Leaf } q)$
+3. **Grafo semplice per $f: a \to b$:**
+   $$\mathrm{graph}(f) = \{(1, p), (2, q)\}$$
+4. **Descrizione del funzionamento di `fmap f`:**
+   `fmap f` percorre la struttura ad albero: sui nodi intermedi di diramazione `Node left right`, propaga la chiamata ai due rami preservando la ramificazione; quando raggiunge una foglia `Leaf x`, applica la funzione $f$ al valore $x$ ottenendo `Leaf (f x)`.
 
 
 ---
@@ -1340,13 +1658,13 @@ data List a = Nil | Cons a (List a)
    $$\{\alpha_X: F(X) \to G(X)\}_{X \in \mathrm{obj}(\mathbf{C})}$$
    indicizzata dagli oggetti di $\mathbf{C}$, tale che per ogni morfismo $f: X \to Y$ in $\mathbf{C}$, il seguente quadrato commuta:
 
-   ```mermaid
-   graph TD
-       FX["F(X)"] -->|"α_X"| GX["G(X)"]
-       FX -->|"F(f)"| FY["F(Y)"]
-       GX -->|"G(f)"| GY["G(Y)"]
-       FY -->|"α_Y"| GY
-   ```
+```mermaid
+flowchart TD
+    FX["F(X)"] -->|"α_X"| GX["G(X)"]
+    FX -->|"F(f)"| FY["F(Y)"]
+    GX -->|"G(f)"| GY["G(Y)"]
+    FY -->|"α_Y"| GY
+```
 
    Cioè:
    $$\alpha_Y \circ F(f) = G(f) \circ \alpha_X$$
@@ -1369,15 +1687,26 @@ data List a = Nil | Cons a (List a)
 > Prove the naturality law in the case where the argument is `Just x`.
 
 **Soluzione:**
-Dobbiamo verificare che:
-$$\text{maybeToList}(\text{fmap}_{Maybe}\, f\, (\text{Just } x)) = \text{fmap}_{[]}\, f\, (\text{maybeToList}(\text{Just } x))$$
-- **LHS (ramo sinistro):**
-  $$\text{fmap}_{Maybe}\, f\, (\text{Just } x) = \text{Just } (f(x))$$
-  $$\text{maybeToList}(\text{Just } (f(x))) = [f(x)]$$
-- **RHS (ramo destro):**
-  $$\text{maybeToList}(\text{Just } x) = [x]$$
-  $$\text{fmap}_{[]}\, f\, [x] = \text{map } f\, [x] = [f(x)]$$
-Poiché $\text{LHS} = [f(x)] = \text{RHS}$, la condizione di naturalità è verificata. $\blacksquare$
+1. **Diagramma commutativo di naturalità:**
+
+```mermaid
+flowchart TD
+    MA["Maybe a"] -->|"maybeToList"| LA["[a]"]
+    MA -->|"fmap f"| MB["Maybe b"]
+    LA -->|"map f"| LB["[b]"]
+    MB -->|"maybeToList"| LB
+```
+
+2. **Verifica algebrica sul caso `Just x`:**
+   Dobbiamo verificare che:
+   $$\text{maybeToList}(\text{fmap}_{Maybe}\, f\, (\text{Just } x)) = \text{fmap}_{[]}\, f\, (\text{maybeToList}(\text{Just } x))$$
+   - **LHS (ramo sinistro):**
+     $$\text{fmap}_{Maybe}\, f\, (\text{Just } x) = \text{Just } (f(x))$$
+     $$\text{maybeToList}(\text{Just } (f(x))) = [f(x)]$$
+   - **RHS (ramo destro):**
+     $$\text{maybeToList}(\text{Just } x) = [x]$$
+     $$\text{fmap}_{[]}\, f\, [x] = \text{map } f\, [x] = [f(x)]$$
+   Poiché $\text{LHS} = [f(x)] = \text{RHS}$, la condizione di naturalità è verificata. $\blacksquare$
 
 ---
 

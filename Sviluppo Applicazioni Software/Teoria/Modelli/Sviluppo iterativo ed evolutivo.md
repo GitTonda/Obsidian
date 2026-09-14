@@ -6,20 +6,27 @@ Esempi di processi di sviluppo iterativo ed evolutivo sono:
 - [[UP (unified process)]]
 - [[XP (extreme programing)]]
 - [[Scrum]]
+- [[Agile Modeling]]
 
-Vantaggi:
-- riduzione precoce dei rischi maggiori (tecnici, obbiettivi, requisiti, ...)
+#### Vantaggi:
+- Riduzione precoce dei rischi maggiori (tecnici, obiettivi, requisiti, ...)
 - Progresso visibile
-- Feedback
-- Gestione complessità
+- Feedback continuo
+- Gestione della complessità
 
 #### In Sintesi:
 ###### Iterativo:
-- aggiunta progressiva di funzionalità
-- si migliora progressivamente la stessa cosa
-- a ogni iterazione il prodotto viene raffinato
+- Aggiunta progressiva di funzionalità
+- Si migliora progressivamente la stessa cosa
+- A ogni iterazione il prodotto viene raffinato
 ###### Evolutivo:
-- adattamento nel tempo
-- anche i requisiti si adattano
-- il prodotto cresce in base ai feedback
-- può includere sie
+- Adattamento nel tempo
+- Anche i requisiti si adattano
+- Il prodotto cresce in base ai feedback
+
+---
+#### Correlati:
+- [[Processi per lo sviluppo Software]]
+- Correlato a: [[Sviluppo incrementale]]
+- Contrapposto a: [[Modello a Cascata (Sequenziale)]]
+- Risoluzione d'esame in: [[Guida Rapida ed Esercizi Esame SAS]]

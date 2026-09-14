@@ -17,13 +17,13 @@
    $$\{\alpha_X: F(X) \to G(X)\}_{X \in \mathrm{obj}(\mathbf{C})}$$
    indicizzata dagli oggetti di $\mathbf{C}$, tale che per ogni morfismo $f: X \to Y$ in $\mathbf{C}$, il seguente quadrato commuta:
 
-   ```mermaid
-   graph TD
-       FX["F(X)"] -->|"α_X"| GX["G(X)"]
-       FX -->|"F(f)"| FY["F(Y)"]
-       GX -->|"G(f)"| GY["G(Y)"]
-       FY -->|"α_Y"| GY
-   ```
+```mermaid
+flowchart TD
+    FX["F(X)"] -->|"α_X"| GX["G(X)"]
+    FX -->|"F(f)"| FY["F(Y)"]
+    GX -->|"G(f)"| GY["G(Y)"]
+    FY -->|"α_Y"| GY
+```
 
    Cioè:
    $$\alpha_Y \circ F(f) = G(f) \circ \alpha_X$$
@@ -46,15 +46,26 @@
 > Prove the naturality law in the case where the argument is `Just x`.
 
 **Soluzione:**
-Dobbiamo verificare che:
-$$\text{maybeToList}(\text{fmap}_{Maybe}\, f\, (\text{Just } x)) = \text{fmap}_{[]}\, f\, (\text{maybeToList}(\text{Just } x))$$
-- **LHS (ramo sinistro):**
-  $$\text{fmap}_{Maybe}\, f\, (\text{Just } x) = \text{Just } (f(x))$$
-  $$\text{maybeToList}(\text{Just } (f(x))) = [f(x)]$$
-- **RHS (ramo destro):**
-  $$\text{maybeToList}(\text{Just } x) = [x]$$
-  $$\text{fmap}_{[]}\, f\, [x] = \text{map } f\, [x] = [f(x)]$$
-Poiché $\text{LHS} = [f(x)] = \text{RHS}$, la condizione di naturalità è verificata. $\blacksquare$
+1. **Diagramma commutativo di naturalità:**
+
+```mermaid
+flowchart TD
+    MA["Maybe a"] -->|"maybeToList"| LA["[a]"]
+    MA -->|"fmap f"| MB["Maybe b"]
+    LA -->|"map f"| LB["[b]"]
+    MB -->|"maybeToList"| LB
+```
+
+2. **Verifica algebrica sul caso `Just x`:**
+   Dobbiamo verificare che:
+   $$\text{maybeToList}(\text{fmap}_{Maybe}\, f\, (\text{Just } x)) = \text{fmap}_{[]}\, f\, (\text{maybeToList}(\text{Just } x))$$
+   - **LHS (ramo sinistro):**
+     $$\text{fmap}_{Maybe}\, f\, (\text{Just } x) = \text{Just } (f(x))$$
+     $$\text{maybeToList}(\text{Just } (f(x))) = [f(x)]$$
+   - **RHS (ramo destro):**
+     $$\text{maybeToList}(\text{Just } x) = [x]$$
+     $$\text{fmap}_{[]}\, f\, [x] = \text{map } f\, [x] = [f(x)]$$
+   Poiché $\text{LHS} = [f(x)] = \text{RHS}$, la condizione di naturalità è verificata. $\blacksquare$
 
 ---
 

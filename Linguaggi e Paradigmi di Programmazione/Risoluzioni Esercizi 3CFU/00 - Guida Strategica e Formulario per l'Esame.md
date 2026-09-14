@@ -122,7 +122,7 @@ I due risultati coincidono!
 Dati due funtori $F, G: \mathbf{C} \to \mathbf{D}$, una trasformazione naturale $\alpha: F \Rightarrow G$ è una famiglia di morfismi $\alpha_X: F(X) \to G(X)$ tale che per ogni freccia $f: A \to B$ commuta il diagramma:
 
 ```mermaid
-graph TD
+flowchart TD
     FA["F A"] -->|"alpha_A"| GA["G A"]
     FA -->|"fmap_F f"| FB["F B"]
     GA -->|"fmap_G f"| GB["G B"]

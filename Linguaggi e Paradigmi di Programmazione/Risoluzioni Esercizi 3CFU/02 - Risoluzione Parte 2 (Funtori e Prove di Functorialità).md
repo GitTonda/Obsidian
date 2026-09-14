@@ -25,14 +25,22 @@
    - $\mathcal{P}f(\{x\}) = \{f(x)\} = \{p\} \in \mathcal{P}(B)$
    - $\mathcal{P}f(\{x, y\}) = \{f(x), f(y)\} = \{p, q\} \in \mathcal{P}(B)$
 4. **Diagramma commutativo:**
-   ```mermaid
-   graph TD
-       A["A = {x, y}"] -->|"f = {(x,p), (y,q)}"| B["B = {p, q}"]
-       PA["P(A) = {∅, {x}, {y}, {x,y}}"] -->|"P(f)"| PB["P(B) = {∅, {p}, {q}, {p,q}}"]
-   ```
-   *Decorazione degli elementi:*
-   $$\{x\} \in \mathcal{P}(A) \xrightarrow{\mathcal{P}f} \{p\} \in \mathcal{P}(B)$$
-   $$\{x, y\} \in \mathcal{P}(A) \xrightarrow{\mathcal{P}f} \{p, q\} \in \mathcal{P}(B)$$
+
+```mermaid
+flowchart TD
+    subgraph Insiemi["Insiemi Base in Set"]
+        A["A = {x, y}"] -->|"f = {(x,p), (y,q)}"| B["B = {p, q}"]
+    end
+    subgraph Powerset["Funtore Powerset 𝒫"]
+        PA["𝒫(A) = {∅, {x}, {y}, {x,y}}"] -->|"𝒫(f)"| PB["𝒫(B) = {∅, {p}, {q}, {p,q}}"]
+    end
+    A -.->|"𝒫"| PA
+    B -.->|"𝒫"| PB
+```
+
+*Decorazione degli elementi:*
+- $\{x\} \in \mathcal{P}(A) \xrightarrow{\mathcal{P}f} \{p\} \in \mathcal{P}(B)$
+- $\{x, y\} \in \mathcal{P}(A) \xrightarrow{\mathcal{P}f} \{p, q\} \in \mathcal{P}(B)$
 
 ---
 
@@ -50,11 +58,19 @@
 
 **Soluzione:**
 1. **Diagramma:**
-   ```mermaid
-   graph TD
-       Sigma["Σ = {0, 1}"] -->|"f"| Gamma["Γ = {aa, b}"]
-       SigmaStar["Σ*"] -->|"f*"| GammaStar["Γ*"]
-   ```
+
+```mermaid
+flowchart TD
+    subgraph Alfabeti["Alfabeti"]
+        Sigma["Σ = {0, 1}"] -->|"f: 0 ↦ aa, 1 ↦ b"| Gamma["Γ = {aa, b}"]
+    end
+    subgraph Monoidi["Monoidi Liberi"]
+        SigmaStar["Σ* = {0, 1}*"] -->|"f*"| GammaStar["Γ* = {aa, b}*"]
+    end
+    Sigma -.->|"(-)*"| SigmaStar
+    Gamma -.->|"(-)*"| GammaStar
+```
+
 2. **Analisi della stringa $aabaa$:**
    Scomponiamo la stringa $aabaa$ rispetto ai simboli generabili tramite $f$:
    $$aabaa = (aa) \cdot (b) \cdot (aa) = f(0) \cdot f(1) \cdot f(0) = f^*(0 \cdot 1 \cdot 0) = f^*(010)$$
@@ -68,7 +84,20 @@
 > • Is $pqqrqqp$ an element of $\Gamma^*$ obtained via the Kleene Star construction? Explain your reasoning.
 
 **Soluzione:**
-1. **Diagramma:** analogo, con $\Sigma \xrightarrow{f} \Gamma$ e $\Sigma^* \xrightarrow{f^*} \Gamma^*$.
+1. **Diagramma:**
+
+```mermaid
+flowchart TD
+    subgraph Alfabeti["Alfabeti"]
+        Sigma["Σ = {x, y, z}"] -->|"f: x ↦ p, y ↦ qq, z ↦ r"| Gamma["Γ = {p, qq, r}"]
+    end
+    subgraph Monoidi["Monoidi Liberi"]
+        SigmaStar["Σ* = {x, y, z}*"] -->|"f*"| GammaStar["Γ* = {p, qq, r}*"]
+    end
+    Sigma -.->|"(-)*"| SigmaStar
+    Gamma -.->|"(-)*"| GammaStar
+```
+
 2. **Analisi della stringa $pqqrqqp$:**
    Scomponiamo:
    $$pqqrqqp = (p) \cdot (qq) \cdot (r) \cdot (qq) \cdot (p) = f(x) \cdot f(y) \cdot f(z) \cdot f(y) \cdot f(x) = f^*(xyzyx)$$
@@ -83,10 +112,25 @@
 > • Determine whether $mmnmmn$ belongs to $\Gamma^*$ under the Kleene Star functor $(-)^*$. Provide justification.
 
 **Soluzione:**
-Scomponiamo $mmnmmn$:
-$$mmnmmn = (mm) \cdot (n) \cdot (mm) \cdot (n) = f(u) \cdot f(v) \cdot f(u) \cdot f(v) = f^*(uvuv)$$
-Poiché la stringa sorgente $uvuv \in \Sigma^*$, $f^*(uvuv) = mmnmmn \in \Gamma^*$.
-**Risposta:** **SÌ.**
+1. **Diagramma:**
+
+```mermaid
+flowchart TD
+    subgraph Alfabeti["Alfabeti"]
+        Sigma["Σ = {u, v}"] -->|"f: u ↦ mm, v ↦ n"| Gamma["Γ = {mm, n}"]
+    end
+    subgraph Monoidi["Monoidi Liberi"]
+        SigmaStar["Σ* = {u, v}*"] -->|"f*"| GammaStar["Γ* = {mm, n}*"]
+    end
+    Sigma -.->|"(-)*"| SigmaStar
+    Gamma -.->|"(-)*"| GammaStar
+```
+
+2. **Analisi della stringa $mmnmmn$:**
+   Scomponiamo $mmnmmn$:
+   $$mmnmmn = (mm) \cdot (n) \cdot (mm) \cdot (n) = f(u) \cdot f(v) \cdot f(u) \cdot f(v) = f^*(uvuv)$$
+   Poiché la stringa sorgente $uvuv \in \Sigma^*$, $f^*(uvuv) = mmnmmn \in \Gamma^*$.
+   **Risposta:** **SÌ.**
 
 ---
 
@@ -327,31 +371,257 @@ data U a b where
 
 ## CT0300: Diagrammi Categoriali in $\mathbf{Set}$ per Funtori (Esercizi 16 - 21)
 
-> **Struttura Standard della Risposta (Richiesta per tutti gli esercizi 16–21):**
-> 1. Richiamare la definizione del tipo di dato.
-> 2. Disegnare il diagramma commutativo generico generato dal funtore $F$:
->    ```
->        a  ---- f ---->  b
->        |                |
->        F                F
->        v                v
->       F a -- fmap f --> F b
->    ```
-> 3. Decorare gli oggetti con istanze concrete:
->    - Scegliere due insiemi finiti semplici: $a = \{1, 2\}$, $b = \{p, q\}$.
->    - Fissare una funzione $f$: $f(1) = p, f(2) = q$.
-> 4. Definire il grafo della funzione $f$:
->    $$\mathrm{graph}(f) = \{(1, p), (2, q)\}$$
-> 5. Descrivere a parole come opera `fmap f` senza darne la definizione formale di codice:
->    *"Prende una struttura contenente valori in $a$ e la trasforma preservando l'intera forma/scheletro strutturale (nodi, puntatori, rami), sostituendo ogni elemento interno $x \in a$ con il corrispondente valore $f(x) \in b$."*
+> **Contesto comune per gli Esercizi 16–21:**
+> Siamo nella categoria $\mathbf{Set}$. Consideriamo come insiemi base semplici:
+> $$a = \{1, 2\}, \quad b = \{p, q\}$$
+> e come funzione $f: a \to b$:
+> $$f(1) = p, \quad f(2) = q$$
+> Il suo **grafo** (inteso in teoria degli insiemi come sottoinsieme del prodotto cartesiano $a \times b$) è:
+> $$\mathrm{graph}(f) = \{(1, p), (2, q)\} \subseteq a \times b$$
 
-### Tabella riassuntiva per gli Esercizi 16–21:
+---
 
-| Es. | Tipo | Istanze concrete in $F a$ ($a=\{1, 2\}$) | Istanze trasformate in $F b$ tramite `fmap f` |
-|---|---|---|---|
-| **16** | `Maybe a` | `Nothing`, `Just 1` | `Nothing`, `Just p` |
-| **17** | `List a` | `Nil`, `Cons 1 (Cons 2 Nil)` | `Nil`, `Cons p (Cons q Nil)` |
-| **18** | `Either c a` | `Left c0`, `Right 1` | `Left c0`, `Right p` |
-| **19** | `T a` | `TL 1`, `TN [TL 1, TL 2]` | `TL p`, `TN [TL p, TL q]` |
-| **20** | `BTree n` (valori sui nodi) | `Node 1 Leaf Leaf` | `Node p Leaf Leaf` |
-| **21** | `BTree n l` (valori sulle foglie) | `Node (Leaf 1) (Leaf 2)` | `Node (Leaf p) (Leaf q)` |
+### Esercizio 16 (`Maybe a`)
+> **Testo:** Let us assume that we are in the category $\mathbf{Set}$.
+> 1. Recall the definition of `Maybe a`.
+> 2. Draw the corresponding diagram, starting from an arrow `f :: a -> b`.
+> 3. Decorate the diagram objects with simple instances.
+> 4. Define a simple graph for `f :: a -> b`.
+> 5. Describe how `fmap f` would work, without explicitly defining it.
+
+**Soluzione:**
+1. **Definizione di `Maybe a`:**
+   ```haskell
+   data Maybe a = Nothing | Just a
+   ```
+2. **Diagramma commutativo del funtore:**
+
+```mermaid
+flowchart TD
+    subgraph Oggetti_Base["Insiemi Base"]
+        A["a = {1, 2}"] -->|"f"| B["b = {p, q}"]
+    end
+    subgraph Oggetti_Funtoriali["Funtore Maybe"]
+        FA["Maybe a"] -->|"fmap f"| FB["Maybe b"]
+    end
+    A -.->|"Maybe"| FA
+    B -.->|"Maybe"| FB
+```
+
+3. **Decorazione del diagramma con istanze semplici:**
+   - Istanze in $a$: $1, 2 \in a$. Istanze in $b$: $p, q \in b$.
+   - Istanze in $\text{Maybe } a$: $\text{Nothing}, \text{Just } 1, \text{Just } 2$.
+   - Azione di $\text{fmap } f$:
+     - $\text{fmap } f \text{ Nothing} = \text{Nothing}$
+     - $\text{fmap } f (\text{Just } 1) = \text{Just } (f(1)) = \text{Just } p$
+     - $\text{fmap } f (\text{Just } 2) = \text{Just } (f(2)) = \text{Just } q$
+4. **Grafo semplice per $f: a \to b$:**
+   $$\mathrm{graph}(f) = \{(1, p), (2, q)\} \subset \{1, 2\} \times \{p, q\}$$
+   Rappresentato come grafo orientato: $1 \xrightarrow{f} p$ e $2 \xrightarrow{f} q$.
+5. **Descrizione del funzionamento di `fmap f`:**
+   `fmap f` esamina il valore opzionale incapsulato: se la struttura è vuota (`Nothing`), la lascia invariata restituendo `Nothing`; se contiene un elemento (`Just x`), preserva il costruttore `Just` applicando la funzione $f$ al valore interno, producendo `Just (f x)`.
+
+---
+
+### Esercizio 17 (`List a`)
+> **Testo:** Let us assume that we are in the category $\mathbf{Set}$.
+> 1. Define a data-type `List a` that recursively formalizes the corresponding concept.
+> 2. Draw the corresponding diagram, starting from an arrow `f :: a -> b`.
+> 3. Decorate the diagram objects with simple instances.
+> 4. Define a simple graph for `f :: a -> b`.
+> 5. Describe how `fmap f` would work, without explicitly defining it.
+
+**Soluzione:**
+1. **Definizione ricorsiva di `List a`:**
+   ```haskell
+   data List a = Nil | Cons a (List a)
+   ```
+2. **Diagramma commutativo del funtore:**
+
+```mermaid
+flowchart TD
+    subgraph Oggetti_Base["Insiemi Base"]
+        A["a = {1, 2}"] -->|"f"| B["b = {p, q}"]
+    end
+    subgraph Oggetti_Funtoriali["Funtore List"]
+        FA["List a"] -->|"fmap f"| FB["List b"]
+    end
+    A -.->|"List"| FA
+    B -.->|"List"| FB
+```
+
+3. **Decorazione del diagramma con istanze semplici:**
+   - Istanze in $\text{List } a$: $\text{Nil}$, $\text{Cons } 1 \text{ Nil}$, $\text{Cons } 1 (\text{Cons } 2 \text{ Nil})$.
+   - Azione di $\text{fmap } f$:
+     - $\text{Nil} \mapsto \text{Nil}$
+     - $\text{Cons } 1 \text{ Nil} \mapsto \text{Cons } p \text{ Nil}$
+     - $\text{Cons } 1 (\text{Cons } 2 \text{ Nil}) \mapsto \text{Cons } p (\text{Cons } q \text{ Nil})$
+4. **Grafo semplice per $f: a \to b$:**
+   $$\mathrm{graph}(f) = \{(1, p), (2, q)\}$$
+5. **Descrizione del funzionamento di `fmap f`:**
+   `fmap f` scorre ricorsivamente la lista mantenendo invariata la lunghezza, l'ordine sequenziale e i collegamenti tra i nodi (`Cons` e terminatore `Nil`), sostituendo ciascun elemento $x$ memorizzato in testa con $f(x)$.
+
+---
+
+### Esercizio 18 (`Either a b`)
+> **Testo:** Let us assume that we are in the category $\mathbf{Set}$.
+> 1. Recall the definition of `Either a b`.
+> 2. Draw the corresponding diagram, starting from an arrow `f :: a -> b`.
+> 3. Decorate the diagram objects with simple instances.
+> 4. Define a simple graph for `f :: a -> b`.
+> 5. Describe how `fmap f` would work, without explicitly defining it.
+
+**Soluzione:**
+1. **Definizione di `Either a b`:**
+   ```haskell
+   data Either a b = Left a | Right b
+   ```
+   *(Nota: per essere un funtore di kind `* -> *`, il funtore è parzialmente applicato al primo tipo: `Either c`, mappando il secondo parametro: $f: a \to b \implies \text{Either } c\; a \to \text{Either } c\; b$. Sia $c = \{c_0\}$).*
+2. **Diagramma commutativo del funtore:**
+
+```mermaid
+flowchart TD
+    subgraph Oggetti_Base["Insiemi Base"]
+        A["a = {1, 2}"] -->|"f"| B["b = {p, q}"]
+    end
+    subgraph Oggetti_Funtoriali["Funtore Either c"]
+        FA["Either c a"] -->|"fmap f"| FB["Either c b"]
+    end
+    A -.->|"Either c"| FA
+    B -.->|"Either c"| FB
+```
+
+3. **Decorazione del diagramma con istanze semplici:**
+   - Istanze in $\text{Either } c\; a$: $\text{Left } c_0$, $\text{Right } 1$, $\text{Right } 2$.
+   - Azione di $\text{fmap } f$:
+     - $\text{Left } c_0 \mapsto \text{Left } c_0$
+     - $\text{Right } 1 \mapsto \text{Right } (f(1)) = \text{Right } p$
+     - $\text{Right } 2 \mapsto \text{Right } (f(2)) = \text{Right } q$
+4. **Grafo semplice per $f: a \to b$:**
+   $$\mathrm{graph}(f) = \{(1, p), (2, q)\}$$
+5. **Descrizione del funzionamento di `fmap f`:**
+   Se il valore è incapsulato dal costruttore sinistro (`Left x`), `fmap f` lo ignora e lo propaga identico; se il valore è incapsulato nel costruttore destro (`Right x`), preserva il costruttore `Right` applicando la funzione $f$ al valore $x$, restituendo `Right (f x)`.
+
+---
+
+### Esercizio 19 (`T a`)
+> **Testo:** Consider the following Haskell data-type:
+> ```haskell
+> data T a where
+>   TL :: a -> T a
+>   TN :: [T a] -> T a
+> ```
+> 1. Draw the corresponding diagram, starting from an arrow `f :: a -> b`.
+> 2. Decorate the diagram objects with simple instances.
+> 3. Define a simple graph for `f :: a -> b`.
+> 4. Describe how `fmap f` would work, without explicitly defining it.
+
+**Soluzione:**
+1. **Diagramma commutativo del funtore:**
+
+```mermaid
+flowchart TD
+    subgraph Oggetti_Base["Insiemi Base"]
+        A["a = {1, 2}"] -->|"f"| B["b = {p, q}"]
+    end
+    subgraph Oggetti_Funtoriali["Funtore T"]
+        FA["T a"] -->|"fmap f"| FB["T b"]
+    end
+    A -.->|"T"| FA
+    B -.->|"T"| FB
+```
+
+2. **Decorazione del diagramma con istanze semplici:**
+   - Istanze foglia in $T\, a$: $\text{TL } 1, \text{TL } 2$.
+   - Istanza albero ramificato in $T\, a$: $\text{TN } [\text{TL } 1, \text{TL } 2]$.
+   - Azione di $\text{fmap } f$:
+     - $\text{TL } 1 \mapsto \text{TL } p$
+     - $\text{TL } 2 \mapsto \text{TL } q$
+     - $\text{TN } [\text{TL } 1, \text{TL } 2] \mapsto \text{TN } [\text{TL } p, \text{TL } q]$
+3. **Grafo semplice per $f: a \to b$:**
+   $$\mathrm{graph}(f) = \{(1, p), (2, q)\}$$
+4. **Descrizione del funzionamento di `fmap f`:**
+   `fmap f` attraversa ricorsivamente la struttura dell'albero: per le foglie (`TL x`), trasforma il valore interno applicando $f(x)$; per i nodi interni (`TN ts`), mantiene inalterata la struttura della lista di sottoalberi e applica ricorsivamente `fmap f` a ciascun sottoalbero della lista.
+
+---
+
+### Esercizio 20 (`BTree n`, valori sui nodi)
+> **Testo:** Consider the following Haskell data-type:
+> ```haskell
+> data BTree n where
+>   Leaf :: BTree n
+>   Node :: n -> BTree n -> BTree n -> BTree n
+> ```
+> 1. Draw the corresponding diagram, starting from an arrow `f :: a -> b`.
+> 2. Decorate the diagram objects with simple instances.
+> 3. Define a simple graph for `f :: a -> b`.
+> 4. Describe how `fmap f` would work, without explicitly defining it.
+
+**Soluzione:**
+1. **Diagramma commutativo del funtore:**
+
+```mermaid
+flowchart TD
+    subgraph Oggetti_Base["Insiemi Base"]
+        A["a = {1, 2}"] -->|"f"| B["b = {p, q}"]
+    end
+    subgraph Oggetti_Funtoriali["Funtore BTree"]
+        FA["BTree a"] -->|"fmap f"| FB["BTree b"]
+    end
+    A -.->|"BTree"| FA
+    B -.->|"BTree"| FB
+```
+
+2. **Decorazione del diagramma con istanze semplici:**
+   - Istanza vuota: $\text{Leaf} \in \text{BTree } a$.
+   - Istanza con nodi: $\text{Node } 1 \text{ Leaf Leaf} \in \text{BTree } a$, e $\text{Node } 1 (\text{Node } 2 \text{ Leaf Leaf}) \text{ Leaf} \in \text{BTree } a$.
+   - Azione di $\text{fmap } f$:
+     - $\text{Leaf} \mapsto \text{Leaf}$
+     - $\text{Node } 1 \text{ Leaf Leaf} \mapsto \text{Node } p \text{ Leaf Leaf}$
+     - $\text{Node } 1 (\text{Node } 2 \text{ Leaf Leaf}) \text{ Leaf} \mapsto \text{Node } p (\text{Node } q \text{ Leaf Leaf}) \text{ Leaf}$
+3. **Grafo semplice per $f: a \to b$:**
+   $$\mathrm{graph}(f) = \{(1, p), (2, q)\}$$
+4. **Descrizione del funzionamento di `fmap f`:**
+   `fmap f` visita l'albero binario: le foglie vuote `Leaf` rimangono invariate; su ogni nodo `Node x left right`, sostituisce il valore memorizzato $x$ con $f(x)$ e richiama ricorsivamente `fmap f` sul sottoalbero sinistro e sul sottoalbero destro, preservando esattamente la topologia dell'albero.
+
+---
+
+### Esercizio 21 (`BTree n l`, valori sulle foglie)
+> **Testo:** Consider the following Haskell data-type:
+> ```haskell
+> data BTree n l where
+>   Leaf :: l -> BTree n l
+>   Node :: BTree n l -> BTree n l -> BTree n l
+> ```
+> *(Funtore rispetto al tipo delle foglie $l$: $\text{BTree } n$).*
+> 1. Draw the corresponding diagram, starting from an arrow `f :: a -> b`.
+> 2. Decorate the diagram objects with simple instances.
+> 3. Define a simple graph for `f :: a -> b`.
+> 4. Describe how `fmap f` would work, without explicitly defining it.
+
+**Soluzione:**
+1. **Diagramma commutativo del funtore:**
+
+```mermaid
+flowchart TD
+    subgraph Oggetti_Base["Insiemi Base"]
+        A["a = {1, 2}"] -->|"f"| B["b = {p, q}"]
+    end
+    subgraph Oggetti_Funtoriali["Funtore BTree n"]
+        FA["BTree n a"] -->|"fmap f"| FB["BTree n b"]
+    end
+    A -.->|"BTree n"| FA
+    B -.->|"BTree n"| FB
+```
+
+2. **Decorazione del diagramma con istanze semplici:**
+   - Istanze foglia in $\text{BTree } n\; a$: $\text{Leaf } 1, \text{Leaf } 2$.
+   - Istanza albero in $\text{BTree } n\; a$: $\text{Node } (\text{Leaf } 1) (\text{Leaf } 2)$.
+   - Azione di $\text{fmap } f$:
+     - $\text{Leaf } 1 \mapsto \text{Leaf } p$
+     - $\text{Leaf } 2 \mapsto \text{Leaf } q$
+     - $\text{Node } (\text{Leaf } 1) (\text{Leaf } 2) \mapsto \text{Node } (\text{Leaf } p) (\text{Leaf } q)$
+3. **Grafo semplice per $f: a \to b$:**
+   $$\mathrm{graph}(f) = \{(1, p), (2, q)\}$$
+4. **Descrizione del funzionamento di `fmap f`:**
+   `fmap f` percorre la struttura ad albero: sui nodi intermedi di diramazione `Node left right`, propaga la chiamata ai due rami preservando la ramificazione; quando raggiunge una foglia `Leaf x`, applica la funzione $f$ al valore $x$ ottenendo `Leaf (f x)`.

@@ -16,11 +16,11 @@
 
 #### Contesto del Sistema
 - ###### Modellazione del dominio:
-	 i concetti importanti sono oggetti di dominio in relazione tra di loro
+	 I concetti importanti sono oggetti di dominio in relazione tra di loro (vedi [[Modello di Dominio]])
 - ###### Modellazione del business:
-	 è super insieme del modello di dominio, descrive i processi di business
+	 È un super insieme del modello di dominio, descrive i processi di business
 
-In UP si usano i **Casi d'Uso**, che rappresentano una maniera per utilizzare il sistema. (descrizione testuale)
+In [[UP (unified process)]] si usano i **Casi d'Uso**, che rappresentano una maniera per utilizzare il sistema. (descrizione testuale)
 
 #### Casi d'Uso
 Sono descrizioni testuali di scenario di uso del sistema software
@@ -31,7 +31,7 @@ Un **Attore** è qualcosa o qualcuno dotato di comportamento:
 	 offre un servizio al sistema
 - Fuori Scena
 	 ha un interesse nel comportamento del caso d'uso
-Uno **Scenario** è una sequenza di azioni ed interazioni tra attori
+Uno **Scenario** è una sequenza di azioni ed interazioni tra attori (modellato graficamente tramite [[Diagramma di Sequenza di Sistema (SSD)]])
 
 - ###### Formato Breve:
 	 riepilogo di un solo paragrafo per il solo scenario di successo
@@ -52,7 +52,7 @@ Uno **Scenario** è una sequenza di azioni ed interazioni tra attori
 - ###### Pre-condizioni:
 	 condizioni che devono per forza essere vere prima di iniziare uno scenario
 - ###### Post-condizioni:
-	 condizioni che saranno vere alla fine dello scenario
+	 condizioni che saranno vere alla fine dello scenario (vedi anche [[Contratti delle Operazioni]])
 - ###### Estenzione:
 	 formata da due parti:
 	 - condizione: causa dell'eccezione
@@ -66,3 +66,11 @@ Uno **Scenario** è una sequenza di azioni ed interazioni tra attori
 - ###### Il test della dimensione:
 	 il formato dettagliato richede 3-10 pagine
 
+---
+#### Correlati:
+- [[UP (unified process)]]
+- Avviato in: [[Ideazione]] | Raffinato in: [[Elaborazione]]
+- Tradotto graficamente in: [[Diagramma di Sequenza di Sistema (SSD)]]
+- Connesso al: [[Modello di Dominio]]
+- Applicato in: [[Esempio di Progettazione con GRASP]]
+- [[Guida Rapida ed Esercizi Esame SAS]]

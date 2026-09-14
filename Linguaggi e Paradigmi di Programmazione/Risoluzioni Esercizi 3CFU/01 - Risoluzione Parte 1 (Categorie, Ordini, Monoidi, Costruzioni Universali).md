@@ -44,14 +44,14 @@ $$\le \;=\; \{(a, a), (b, b), (c, c), (a, b), (b, c), (a, c), (b, a)\}$$
 
 **Diagramma commutativo:**
 ```mermaid
-graph LR
-    a((a)) -->|id_a| a
-    b((b)) -->|id_b| b
-    c((c)) -->|id_c| c
-    a -->|(a,b)| b
-    b -->|(b,a)| a
-    b -->|(b,c)| c
-    a -->|(a,c)| c
+flowchart LR
+    a((a)) -->|"id_a"| a
+    b((b)) -->|"id_b"| b
+    c((c)) -->|"id_c"| c
+    a -->|"(a,b)"| b
+    b -->|"(b,a)"| a
+    b -->|"(b,c)"| c
+    a -->|"(a,c)"| c
 ```
 - La composizione $(b, c) \circ (a, b) = (a, c)$ commuta.
 - La composizione $(b, a) \circ (a, b) = (a, a) = \mathrm{id}_a$ commuta.
@@ -86,20 +86,23 @@ Dunque ogni ordine parziale è una categoria. (L'antisimmetria aggiunge l'ulteri
 1. **Esempio:** Sia $X = \{a, b, c\}$ con la relazione:
    $$\le \;=\; \{(a, a), (b, b), (c, c), (a, b), (b, c), (a, c)\}$$
 2. **Diagramma commutativo:**
-   ```mermaid
-   graph LR
-       a((a)) -->|(a,b)| b((b))
-       b -->|(b,c)| c((c))
-       a -->|(a,c)| c
-   ```
-   *(I cappi di identità su ciascun nodo sono impliciti).*
+
+```mermaid
+flowchart LR
+    a((a)) -->|"(a,b)"| b((b))
+    b -->|"(b,c)"| c((c))
+    a -->|"(a,c)"| c
+```
+*(I cappi di identità su ciascun nodo sono impliciti).*
+
 3. **Grafo che NON può essere un sottografo:**
    Un grafo contenente un ciclo tra nodi distinti, ad esempio:
-   ```mermaid
-   graph LR
-       a((a)) --> b((b))
-       b --> a
-   ```
+
+```mermaid
+flowchart LR
+    a((a)) --> b((b))
+    b --> a
+```
    **Motivazione:** In un ordine parziale vale l'antisimmetria ($a \le b \land b \le a \implies a = b$). La presenza contemporanea di una freccia $a \to b$ e di una freccia $b \to a$ con $a \ne b$ violerebbe l'antisimmetria. Inoltre, non possono esistere due frecce parallele distinte tra gli stessi due nodi ($|\mathbf{C}(x, y)| \le 1$).
 
 ---
@@ -126,19 +129,22 @@ Poiché un ordine totale è a tutti gli effetti un ordine parziale (e quindi un 
 1. **Esempio:** L'insieme $X = \{1, 2, 3\}$ con il consueto ordine $\le$:
    $$\le \;=\; \{(1,1), (2,2), (3,3), (1,2), (2,3), (1,3)\}$$
 2. **Diagramma commutativo:**
-   ```mermaid
-   graph LR
-       1((1)) --> 2((2))
-       2 --> 3((3))
-       1 --> 3
-   ```
+
+```mermaid
+flowchart LR
+    n1((1)) --> n2((2))
+    n2 --> n3((3))
+    n1 --> n3
+```
+
 3. **Grafo che NON può essere un sottografo:**
    Un grafo in cui due nodi non sono confrontabili in alcuna direzione, ad esempio:
-   ```mermaid
-   graph LR
-       1((1)) --> 2((2))
-       1 --> 3((3))
-   ```
+
+```mermaid
+flowchart LR
+    n1((1)) --> n2((2))
+    n1 --> n3((3))
+```
    *(senza alcuna freccia tra 2 e 3).*  
    **Motivazione:** In un ordine totale ogni coppia di elementi deve essere confrontabile ($\forall x, y.\; x \le y \lor y \le x$). L'assenza di frecce tra $2$ e $3$ (in entrambe le direzioni) violerebbe l'assioma di totalità (come mostrato nei lucidi Roversi, slide 14 di `CT0050`).
 
@@ -265,6 +271,14 @@ Un grafo orientato $G = (V, E)$ consiste unicamente di un insieme di vertici $V$
 **Soluzione:**
 1. **Definizione di Monomorfismo:** In una categoria $\mathbf{C}$, un morfismo $f: X \to Y$ è detto **monomorfismo** (o freccia mono, o semplificabile a sinistra) se per ogni coppia di morfismi paralleli $g, h: Z \to X$:
    $$f \circ g = f \circ h \implies g = h$$
+
+```mermaid
+flowchart LR
+    Z((Z)) -->|"g"| X((X))
+    Z -->|"h"| X
+    X -->|"f (mono)"| Y((Y))
+```
+
 2. **Generalizzazione da funzione iniettiva:**
    In $\mathbf{Set}$, una funzione $f: X \to Y$ è iniettiva se $\forall x, x' \in X,\; f(x) = f(x') \implies x = x'$.
    Se consideriamo $Z = \{\bullet\}$ (un singoletto), due funzioni $g, h: \{\bullet\} \to X$ corrispondono alla scelta di due elementi $g(\bullet) = x$ e $h(\bullet) = x'$ in $X$.
@@ -280,6 +294,14 @@ Un grafo orientato $G = (V, E)$ consiste unicamente di un insieme di vertici $V$
 **Soluzione:**
 1. **Definizione di Epimorfismo:** In una categoria $\mathbf{C}$, un morfismo $f: X \to Y$ è detto **epimorfismo** (o freccia epi, o semplificabile a destra) se per ogni coppia di morfismi paralleli $g, h: Y \to Z$:
    $$g \circ f = h \circ f \implies g = h$$
+
+```mermaid
+flowchart LR
+    X((X)) -->|"f (epi)"| Y((Y))
+    Y -->|"g"| Z((Z))
+    Y -->|"h"| Z
+```
+
 2. **Generalizzazione da funzione suriettiva:**
    In $\mathbf{Set}$, $f: X \to Y$ è suriettiva se l'immagine di $f$ copre tutto il codominio: $\mathrm{Im}(f) = Y$.
    Se $f$ non fosse suriettiva, esisterebbe almeno un elemento $y_0 \in Y \setminus \mathrm{Im}(f)$. Potremmo allora costruire due funzioni $g, h: Y \to \{0, 1\}$ che concordano su tutti gli elementi di $\mathrm{Im}(f)$ ma differiscono su $y_0$ (es. $g(y_0) = 0$ e $h(y_0) = 1$). In tal caso avremmo $g \circ f = h \circ f$ ma $g \ne h$.
@@ -292,6 +314,13 @@ Un grafo orientato $G = (V, E)$ consiste unicamente di un insieme di vertici $V$
 
 **Soluzione:**
 1. **Definizione:** In una categoria $\mathbf{C}$, un oggetto $T \in \mathrm{obj}(\mathbf{C})$ è detto **terminale** se per ogni oggetto $X \in \mathrm{obj}(\mathbf{C})$ esiste **uno e un solo** morfismo $!_X: X \to T$.
+
+```mermaid
+flowchart LR
+    X((X)) -->|"!_X (unico)"| T((T))
+    Y((Y)) -->|"!_Y (unico)"| T
+```
+
 2. **Generalizzazione dal singoletto:**
    Nella categoria $\mathbf{Set}$, consideriamo un insieme singoletto $\{\star\}$. Per qualsiasi insieme $X$, quante funzioni esistono da $X$ a $\{\star\}$?
    Esiste una sola funzione: quella costante che mappa ogni elemento $x \in X$ nell'unico elemento $\star$: $f(x) = \star$.
@@ -345,6 +374,16 @@ Poiché esistono 3 funzioni distinte da $\{1\}$ a $\{a, b, c\}$, la freccia non 
 **Soluzione:**
 1. **Definizione di Prodotto:** In una categoria $\mathbf{C}$, il prodotto di due oggetti $A$ e $B$ è una tripla $(P, \pi_1, \pi_2)$ con $\pi_1: P \to A$ e $\pi_2: P \to B$, tale che per ogni altro oggetto $C$ dotato di due frecce $f: C \to A$ e $g: C \to B$, esiste un'**unica freccia mediatrice** $m: C \to P$ tale che:
    $$\pi_1 \circ m = f \quad \text{e} \quad \pi_2 \circ m = g$$
+
+```mermaid
+flowchart TD
+    C((C)) -->|"f"| A((A))
+    C -->|"g"| B((B))
+    C -->|"m (unica)"| P((P = A × B))
+    P -->|"π1"| A
+    P -->|"π2"| B
+```
+
 2. **Perché $(a, \backslash x \to x, \backslash x \to y::b)$ NON è un prodotto:**
    Qui il candidato è $P = a$, con proiezioni $p_1 = \lambda x \to x$ e $p_2 = \lambda x \to y$ (funzione costante che restituisce un elemento prefissato $y \in b$).
    Prendiamo come candidato test la vera coppia $C = (a, b)$ con le proiezioni standard $f = \mathrm{fst}$ e $g = \mathrm{snd}$.
@@ -448,6 +487,15 @@ Siano $(P, \pi_1^P, \pi_2^P)$ e $(Q, \pi_1^Q, \pi_2^Q)$ due prodotti per gli ogg
 > Per ogni candidato $(C, q_1, q_2)$ con $q_1: A \to C$ e $q_2: B \to C$, deve esistere un'**unica freccia mediatrice** $s: A + B \to C$ tale che:
 > $$s \circ \iota_1 = q_1 \quad \text{e} \quad s \circ \iota_2 = q_2$$
 > In Haskell il coprodotto è `Either a b` con $\iota_1 = \mathrm{Left}$ e $\iota_2 = \mathrm{Right}$.
+
+```mermaid
+flowchart TD
+    A((A)) -->|"q1"| C((C))
+    B((B)) -->|"q2"| C
+    A -->|"ι1"| S((A + B))
+    B -->|"ι2"| S
+    S -->|"s (unica)"| C
+```
 
 ### Esercizio 28
 > **Testo:** Is the following triple:
